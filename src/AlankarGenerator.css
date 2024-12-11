@@ -1,0 +1,101 @@
+/* AlankarGenerator.css */
+
+/* General container styling */
+.container {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Heading styling */
+h2,
+h3 {
+  color: #333;
+  text-align: center;
+}
+
+/* Pattern container styling */
+.pattern-container {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Note button styling */
+.note-button {
+  margin: 5px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.note-button:hover {
+  background-color: #0056b3;
+}
+
+/* Generate button styling */
+.generate-button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.generate-button:hover {
+  background-color: #218838;
+}
+
+/* Selected notes display */
+.selected-notes {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Output container styling */
+.output-container {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.output-line {
+  padding: 5px 0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  color: #222;
+}
+
+.undo-button {
+  margin: 10px;
+  padding: 8px 12px;
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.undo-button:hover {
+  background-color: #e55a4f;
+}
