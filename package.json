@@ -40,6 +40,4 @@
     "ajv": "^8.17.1"
   }
 }
-"scripts": {
-  "build": "npm run build"
-}
+
