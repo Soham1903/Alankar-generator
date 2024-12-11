@@ -39,7 +39,13 @@ const App = () => {
   const [straightOutput, setStraightOutput] = useState([]);
   const [reverseOutput, setReverseOutput] = useState([]);
 
+  const playNoteSound = (note) => {
+    const audio = new Audio(`/sounds/${note}.mp3`);
+    audio.play();
+  };
+
   const handleNoteClick = (note, type) => {
+    playNoteSound(note);
     if (type === "straight") {
       setStraightPattern([...straightPattern, note]);
     } else {
