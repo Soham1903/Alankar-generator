@@ -40,3 +40,6 @@
     "ajv": "^8.17.1"
   }
 }
+"scripts": {
+  "build": "react-scripts build"
+}
