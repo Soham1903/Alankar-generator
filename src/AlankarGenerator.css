@@ -134,3 +134,44 @@ h3 {
   background-color: #1e7e34; /* Even darker green when clicked */
   transform: scale(1); /* Return to normal size */
 }
+
+.tempo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.tempo-label {
+  margin-right: 10px;
+}
+
+.tempo-input {
+  width: 50px;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.tempo-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.clear-button {
+  padding: 8px 12px;
+  margin: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(255, 0, 106, 0.91); /* Green color for play */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.clear-button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
