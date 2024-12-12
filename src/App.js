@@ -44,6 +44,21 @@ const App = () => {
     audio.play();
   };
 
+  const playNotesWithDelay = (output, noteDelay = 300, lineDelay = 500) => {
+    let delay = 0;
+
+    output.forEach((line) => {
+      line.forEach((note) => {
+        setTimeout(() => {
+          const audio = new Audio(`/sounds/${note}.mp3`);
+          audio.play();
+        }, delay);
+        delay += noteDelay; // Add delay for each note
+      });
+      delay += lineDelay; // Add extra delay between lines
+    });
+  };
+
   const handleNoteClick = (note, type) => {
     playNoteSound(note);
     if (type === "straight") {
@@ -77,6 +92,9 @@ const App = () => {
       }
     }
     setStraightOutput(output);
+
+    // Play the notes with delays
+    playNotesWithDelay(output);
   };
 
   const generateReversePattern = () => {
@@ -95,6 +113,9 @@ const App = () => {
       }
     }
     setReverseOutput(output);
+
+    // Play the notes with delays
+    playNotesWithDelay(output);
   };
 
   return (
