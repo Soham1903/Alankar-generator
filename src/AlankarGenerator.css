@@ -175,3 +175,57 @@ h3 {
 .clear-button:hover {
   background-color: #218838; /* Darker green on hover */
 }
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .tempo-container,
+  .pattern-container,
+  .output-container {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .note-button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  .undo-button,
+  .clear-button,
+  .generate-button,
+  .play-button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .note-button {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .undo-button,
+  .clear-button,
+  .generate-button,
+  .play-button {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  h3 {
+    font-size: 0.9rem;
+  }
+}
