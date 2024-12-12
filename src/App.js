@@ -26,6 +26,8 @@ const reverseNotesMap = {
   ग: 8,
   रे: 9,
   सा: 10,
+  ऩि: 11,
+  ध़: 12,
 };
 
 const findKeyByValue = (map, value) => {
