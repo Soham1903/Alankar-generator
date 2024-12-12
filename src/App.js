@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaUndo, FaTrashAlt } from "react-icons/fa";
 import "./AlankarGenerator.css";
 
 const notesMap = {
@@ -25,8 +26,6 @@ const reverseNotesMap = {
   ग: 8,
   रे: 9,
   सा: 10,
-  ऩि: 11,
-  ध़: 12,
 };
 
 const findKeyByValue = (map, value) => {
@@ -39,6 +38,7 @@ const App = () => {
   const [straightOutput, setStraightOutput] = useState([]);
   const [reverseOutput, setReverseOutput] = useState([]);
   const [currentNote, setCurrentNote] = useState(null); // State for highlighting the current note
+  const [tempo, setTempo] = useState(120); // Tempo state
 
   const playNoteSound = async (note) => {
     const audio = new Audio(`/sounds/${note}.mp3`);
@@ -60,6 +60,16 @@ const App = () => {
 
   const undoReverseNote = () => {
     setReversePattern(reversePattern.slice(0, -1));
+  };
+
+  const clearStraightPattern = () => {
+    setStraightPattern([]);
+    setStraightOutput([]);
+  };
+
+  const clearReversePattern = () => {
+    setReversePattern([]);
+    setReverseOutput([]);
   };
 
   const generateStraightPattern = () => {
@@ -98,21 +108,58 @@ const App = () => {
     setReverseOutput(output);
   };
 
+  const calculateDelay = (pattern) => {
+    // Adjust delay based on the tempo
+    const notesPerMeasure = pattern.length; // Use the length of the current pattern
+    return 60000 / tempo / notesPerMeasure;
+  };
+
   const playPatternWithHighlights = async (pattern, map) => {
+    const noteDelay = calculateDelay(pattern);
+    const lineDelay = noteDelay * 2; // Delay between lines (can adjust as needed)
+
     for (const line of pattern) {
       for (const note of line) {
         setCurrentNote(note); // Highlight the current note
         await playNoteSound(note);
-        await new Promise((resolve) => setTimeout(resolve, 300)); // Delay between notes
+        await new Promise((resolve) => setTimeout(resolve, noteDelay)); // Delay between notes
       }
       setCurrentNote(null); // Clear highlight between lines
-      await new Promise((resolve) => setTimeout(resolve, 500)); // Delay between lines
+      await new Promise((resolve) => setTimeout(resolve, lineDelay)); // Delay between lines
+    }
+  };
+
+  const handleTempoChange = (e) => {
+    const newTempo = parseInt(e.target.value, 10);
+    if (!isNaN(newTempo)) {
+      setTempo(newTempo);
     }
   };
 
   return (
     <div className="container">
       <h2>🎵 Alankar Generator 🎵</h2>
+
+      <div className="tempo-container">
+        <h3>Set Tempo (BPM)</h3>
+        <input
+          type="range"
+          min="40"
+          max="200"
+          value={tempo}
+          onChange={(e) => setTempo(e.target.value)}
+          className="tempo-slider"
+        />
+        <input
+          type="number"
+          value={tempo}
+          onChange={handleTempoChange}
+          min="40"
+          max="200"
+          className="tempo-input"
+        />
+        <div>Tempo: {tempo} BPM</div>
+      </div>
 
       <div className="pattern-container">
         <h3>Select Notes for आरोह</h3>
@@ -129,7 +176,10 @@ const App = () => {
           Selected: {straightPattern.join(" ")}
         </div>
         <button onClick={undoStraightNote} className="undo-button">
-          Undo
+          <FaUndo />
+        </button>
+        <button onClick={clearStraightPattern} className="clear-button">
+          <FaTrashAlt />
         </button>
         <button onClick={generateStraightPattern} className="generate-button">
           Generate आरोह
@@ -157,7 +207,10 @@ const App = () => {
           Selected: {reversePattern.join(" ")}
         </div>
         <button onClick={undoReverseNote} className="undo-button">
-          Undo
+          <FaUndo />
+        </button>
+        <button onClick={clearReversePattern} className="clear-button">
+          <FaTrashAlt />
         </button>
         <button onClick={generateReversePattern} className="generate-button">
           Generate अवरोह
