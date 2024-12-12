@@ -99,3 +99,38 @@ h3 {
 .undo-button:hover {
   background-color: #e55a4f;
 }
+
+.note-button {
+  padding: 10px;
+  margin: 5px;
+  font-size: 16px;
+}
+
+.note-button.highlight {
+  background-color: yellow;
+  color: black;
+  font-weight: bold;
+}
+
+.play-button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: rgb(60, 0, 95); /* Green color for play */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.play-button:hover {
+  background-color: #218838; /* Darker green on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.play-button:active {
+  background-color: #1e7e34; /* Even darker green when clicked */
+  transform: scale(1); /* Return to normal size */
+}
