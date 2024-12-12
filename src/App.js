@@ -38,25 +38,11 @@ const App = () => {
   const [reversePattern, setReversePattern] = useState([]);
   const [straightOutput, setStraightOutput] = useState([]);
   const [reverseOutput, setReverseOutput] = useState([]);
+  const [currentNote, setCurrentNote] = useState(null); // State for highlighting the current note
 
-  const playNoteSound = (note) => {
+  const playNoteSound = async (note) => {
     const audio = new Audio(`/sounds/${note}.mp3`);
-    audio.play();
-  };
-
-  const playNotesWithDelay = (output, noteDelay = 300, lineDelay = 500) => {
-    let delay = 0;
-
-    output.forEach((line) => {
-      line.forEach((note) => {
-        setTimeout(() => {
-          const audio = new Audio(`/sounds/${note}.mp3`);
-          audio.play();
-        }, delay);
-        delay += noteDelay; // Add delay for each note
-      });
-      delay += lineDelay; // Add extra delay between lines
-    });
+    await audio.play();
   };
 
   const handleNoteClick = (note, type) => {
@@ -92,9 +78,6 @@ const App = () => {
       }
     }
     setStraightOutput(output);
-
-    // Play the notes with delays
-    playNotesWithDelay(output);
   };
 
   const generateReversePattern = () => {
@@ -113,9 +96,18 @@ const App = () => {
       }
     }
     setReverseOutput(output);
+  };
 
-    // Play the notes with delays
-    playNotesWithDelay(output);
+  const playPatternWithHighlights = async (pattern, map) => {
+    for (const line of pattern) {
+      for (const note of line) {
+        setCurrentNote(note); // Highlight the current note
+        await playNoteSound(note);
+        await new Promise((resolve) => setTimeout(resolve, 300)); // Delay between notes
+      }
+      setCurrentNote(null); // Clear highlight between lines
+      await new Promise((resolve) => setTimeout(resolve, 500)); // Delay between lines
+    }
   };
 
   return (
@@ -128,7 +120,7 @@ const App = () => {
           <button
             key={note}
             onClick={() => handleNoteClick(note, "straight")}
-            className="note-button"
+            className={`note-button ${currentNote === note ? "highlight" : ""}`}
           >
             {note}
           </button>
@@ -142,6 +134,12 @@ const App = () => {
         <button onClick={generateStraightPattern} className="generate-button">
           Generate आरोह
         </button>
+        <button
+          onClick={() => playPatternWithHighlights(straightOutput, notesMap)}
+          className="play-button"
+        >
+          Play आरोह
+        </button>
       </div>
 
       <div className="pattern-container">
@@ -150,7 +148,7 @@ const App = () => {
           <button
             key={note}
             onClick={() => handleNoteClick(note, "reverse")}
-            className="note-button"
+            className={`note-button ${currentNote === note ? "highlight" : ""}`}
           >
             {note}
           </button>
@@ -163,6 +161,14 @@ const App = () => {
         </button>
         <button onClick={generateReversePattern} className="generate-button">
           Generate अवरोह
+        </button>
+        <button
+          onClick={() =>
+            playPatternWithHighlights(reverseOutput, reverseNotesMap)
+          }
+          className="play-button"
+        >
+          Play अवरोह
         </button>
       </div>
 
